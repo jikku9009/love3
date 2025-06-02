@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Talk to Me, My Love 💌</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #e75480;
+    }
+    .mood-select {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .mood-select button {
+      font-size: 24px;
+      background: #fce4ec;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .mood-select button:hover {
+      transform: scale(1.2);
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+    button.submit {
+      margin-top: 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .thankyou {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8bbd0;
+      border-radius: 10px;
+      display: none;
+    }
+    .quote {
+      text-align: center;
+      margin-top: 25px;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Talk to Me, My Love 💌</h1>
+    <p style="text-align:center;">Choose your mood today:</p>
+    <div class="mood-select">
+      <button title="Happy 😊">😊</button>
+      <button title="Sad 😔">😔</button>
+      <button title="Angry 😠">😠</button>
+      <button title="Stressed 😩">😩</button>
+      <button title="Thinking 💭">💭</button>
+    </div>
+
+    <form id="loveForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="message">Write what’s on your heart:</label><br/>
+      <textarea name="message" id="message" required placeholder="I'm here for anything you want to share..."></textarea>
+      <button type="submit" class="submit">Send to My Love 💖</button>
+    </form>
+
+    <div class="thankyou" id="thankYouMessage">
+      Thank you for opening your heart. I'm always here to listen, with love. 💕
+    </div>
+
+    <div class="quote">“Whatever you're feeling, I’m holding your heart with mine.”</div>
+  </div>
+
+  <script>
+    document.getElementById('loveForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(() => {
+        form.reset();
+        document.getElementById('thankYouMessage').style.display = 'block';
+      }).catch(() => {
+        alert("Oops! Something went wrong. Please try again.");
+      });
+    });
+  </script>
+</body>
+</html>
