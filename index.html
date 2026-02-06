@@ -1,121 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Talk to Me, My Love 💌</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    .container {
-      max-width: 600px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #e75480;
-    }
-    .mood-select {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    .mood-select button {
-      font-size: 24px;
-      background: #fce4ec;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .mood-select button:hover {
-      transform: scale(1.2);
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      resize: none;
-    }
-    button.submit {
-      margin-top: 20px;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .thankyou {
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #f8bbd0;
-      border-radius: 10px;
-      display: none;
-    }
-    .quote {
-      text-align: center;
-      margin-top: 25px;
-      font-style: italic;
-      color: #555;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>For Megha ❤️</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffc3a0);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:22px;
+    animation:float 8s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes float{
+    from{transform:translateY(0) scale(1)}
+    to{transform:translateY(-120vh) scale(1.6);opacity:0}
+}
+
+/* Envelope Card */
+.card{
+    width:280px;
+    height:190px;
+    background:white;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 20px 45px rgba(0,0,0,.4);
+    animation:pulse 1.8s infinite;
+    position:absolute;
+    text-align:center;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.06)}
+}
+
+.card h2{
+    color:#e60073;
+    font-size:26px;
+}
+
+/* Rose Section */
+.rose-section{
+    display:none;
+    text-align:center;
+    animation:fadeIn 2s forwards;
+}
+
+.rose{
+    font-size:160px;
+    animation:grow 2s forwards, glow 2s infinite;
+}
+
+@keyframes grow{
+    from{transform:scale(0)}
+    to{transform:scale(1)}
+}
+
+@keyframes glow{
+    0%,100%{filter:drop-shadow(0 0 15px #ff0066)}
+    50%{filter:drop-shadow(0 0 40px #ff0066)}
+}
+
+.rose-text{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    margin-top:12px;
+    white-space:nowrap;
+    overflow:hidden;
+    width:0;
+    animation:type 3s steps(30) forwards;
+}
+
+@keyframes type{
+    to{width:100%}
+}
+
+/* Letter */
+.letter{
+    display:none;
+    background:rgba(255,255,255,0.97);
+    padding:40px;
+    border-radius:25px;
+    width:90%;
+    max-width:600px;
+    animation:slideUp 2s ease;
+    box-shadow:0 30px 60px rgba(0,0,0,.45);
+}
+
+@keyframes slideUp{
+    from{transform:translateY(120px);opacity:0}
+    to{transform:translateY(0);opacity:1}
+}
+
+.letter h1{
+    text-align:center;
+    color:#e60073;
+    margin-bottom:20px;
+}
+
+.letter p{
+    font-size:18px;
+    line-height:1.8;
+    color:#444;
+    margin-bottom:14px;
+}
+
+.signature{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#e60073;
+    margin-top:20px;
+}
+
+/* Fade */
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Talk to Me, My Love 💌</h1>
-    <p style="text-align:center;">Choose your mood today:</p>
-    <div class="mood-select">
-      <button title="Happy 😊">😊</button>
-      <button title="Sad 😔">😔</button>
-      <button title="Angry 😠">😠</button>
-      <button title="Stressed 😩">😩</button>
-      <button title="Thinking 💭">💭</button>
+
+<!-- Card -->
+<div class="card" id="card">
+    <h2>Open This 💖<br>For You 😘</h2>
+</div>
+
+<!-- Rose -->
+<div class="rose-section" id="roseSection">
+    <div class="rose">🌹</div>
+    <div class="rose-text">This rose is only for you, Megha 💕</div>
+</div>
+
+<!-- Letter -->
+<div class="letter" id="letter">
+    <h1>My Dearest Megha 💌</h1>
+
+    <p>
+        From the moment you came into my life, everything changed 💖  
+        You brought smiles 😊, happiness ✨, and a warmth I never knew I needed 🥹
+    </p>
+
+    <p>
+        Thank you for being part of my life 🌸  
+        Thank you for being **you** ❤️  
+        Your presence itself makes my world brighter 🌈
+    </p>
+
+    <p>
+        You are the **best person** I have 🫶  
+        My comfort 🤍, my peace 🕊️, my favorite thought every day 💭💞
+    </p>
+
+    <p>
+        And honestly Megha 😍  
+        You are **very gorgeous**, **pretty**, and **beautiful** 🌹✨  
+        Not just on the outside, but deeply from your heart 💖
+    </p>
+
+    <p>
+        I feel lucky 🍀, grateful 🙏, and happy 🥰 to have you in my life  
+        You truly mean a lot to me 💘
+    </p>
+
+    <p style="text-align:center;font-weight:bold">
+        Happy Rose Day My Special One 🌹❤️
+    </p>
+
+    <div class="signature">
+        Forever Yours 💕<br>
+        😊🌸✨
     </div>
+</div>
 
-    <form id="loveForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <label for="message">Write what’s on your heart:</label><br/>
-      <textarea name="message" id="message" required placeholder="I'm here for anything you want to share..."></textarea>
-      <button type="submit" class="submit">Send to My Love 💖</button>
-    </form>
+<script>
+/* Floating hearts */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=5+Math.random()*5+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),10000);
+},400);
 
-    <div class="thankyou" id="thankYouMessage">
-      Thank you for opening your heart. I'm always here to listen, with love. 💕
-    </div>
+/* Flow control */
+const card=document.getElementById("card");
+const roseSection=document.getElementById("roseSection");
+const letter=document.getElementById("letter");
 
-    <div class="quote">“Whatever you're feeling, I’m holding your heart with mine.”</div>
-  </div>
+card.onclick=()=>{
+    card.style.display="none";
 
-  <script>
-    document.getElementById('loveForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      }).then(() => {
-        form.reset();
-        document.getElementById('thankYouMessage').style.display = 'block';
-      }).catch(() => {
-        alert("Oops! Something went wrong. Please try again.");
-      });
-    });
-  </script>
+    roseSection.style.display="block";
+
+    setTimeout(()=>{
+        roseSection.style.display="none";
+        letter.style.display="block";
+    },4200);
+};
+</script>
+
 </body>
 </html>
